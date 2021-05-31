@@ -1,3 +1,5 @@
+
+
 (defconstant DATA-FILES '("../cifar-10-batches-bin/data_batch_1.bin" "../cifar-10-batches-bin/data_batch_2.bin" "../cifar-10-batches-bin/data_batch_3.bin" "../cifar-10-batches-bin/data_batch_4.bin" "../cifar-10-batches-bin/data_batch_5.bin"))
 (defconstant TEST-FILE "../cifar-10-batches-bin/test_batch.bin")
 (defconstant IMG-WIDTH 32)
@@ -43,11 +45,25 @@
         ((eq (car data) nil) (cdr data))
   )))
 
+(defun dist (a b)
+  (declare (optimize (speed 3) (safety 0) (space 0) (debug 3))
+           (type (unsigned-byte 8) a b))
+  (abs (- a b))
+  )
+
+
+(declaim (ftype (function ((unsigned-byte 8) (unsigned-byte 8)) (unsigned-byte 8)) dist))
+
 (defun diff-vector (a b)
-  "returns sum of absolute diffs between two lists"
-  (reduce #'+ (map 'vector (lambda (x y) (abs (- x y))) a b )))
+  (declare (optimize (speed 3) (safety 0) (space 0))
+           (type (simple-array (unsigned-byte 8) 1) a b))
+  (loop for x across a
+        for y across b
+        sum (dist (the (unsigned-byte 8) x) (the (unsigned-byte 8) y))
+  ))
 
 (defun diff-picture (a b)
+  (declare (optimize (speed 3)))
   "returns sum of absolute diffs between two pictures"
   (check-type a picture)
   (check-type b picture)
