@@ -1,6 +1,5 @@
-(defconstant DATA-DIR "/home/j/Projects/Lisp/cifar-10-batches-bin/")
 (defconstant DATA-FILES '("../cifar-10-batches-bin/data_batch_1.bin" "../cifar-10-batches-bin/data_batch_2.bin" "../cifar-10-batches-bin/data_batch_3.bin" "../cifar-10-batches-bin/data_batch_4.bin" "../cifar-10-batches-bin/data_batch_5.bin"))
-(defconstant TEST-FILE "/home/j/Projects/Lisp/cifar-10-batches-bin/test_batch.bin")
+(defconstant TEST-FILE "../cifar-10-batches-bin/test_batch.bin")
 (defconstant IMG-WIDTH 32)
 (defconstant IMG-HEIGHT 32)
 (defconstant IMG-SIZE (* IMG-WIDTH IMG-HEIGHT))
